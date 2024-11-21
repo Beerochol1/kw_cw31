@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
      TF_HOME = tool('tf-1.7')
-     ENV_auto_tfvars = credentials('auto.tfvars')
+     ENV_auto_tfvars = credentials('digitalocean_terraform_variables')
     }
 
     stages {
@@ -42,7 +42,7 @@ pipeline {
         }
         stage('Terraform PLAN') {
             steps {
-                withCredentials([file(credentialsId: 'auto.tfvars', variable: 'auto_tfvars')]) {
+                withCredentials([file(credentialsId: 'digitalocean_terraform_variables', variable: 'auto_tfvars')]) {
                     ansiColor('xterm') {
                         sh'''
                         set -e
