@@ -21,8 +21,8 @@ pipeline {
                 script {
                     sh'''
                     set -e
-                    $TF_HOME/terraform -version
-                    $TF_HOME/terraform init -backend-config="conn_str=postgresql://postgres:terraform@localhost:5432/terraform?sslmode=disable"
+                    #$TF_HOME/terraform -version
+                    #$TF_HOME/terraform init -backend-config="conn_str=postgresql://postgres:terraform@localhost:5432/terraform?sslmode=disable"
                     export PATH=$PATH:/var/lib/jenkins/tools/org.jenkinsci.plugins.terraform.TerraformInstallation/tf-1.7
                     docker run -t --user $(id -u):$(id -g) -v $(pwd):/app -w /app hashicorp/terraform:1.7.5 init -backend-config="conn_str=postgresql://postgres:terraform@10.248.160.11:5432/terraform?sslmode=disable"
                     '''
@@ -33,10 +33,10 @@ pipeline {
             steps {
                 sh'''
                 set -e
-                $TF_HOME/terraform validate
-                terraform init -backend-config="conn_str=postgresql://postgres:terraform@localhost:5432/terraform?sslmode=disable"
+                #$TF_HOME/terraform validate
+                #terraform init -backend-config="conn_str=postgresql://postgres:terraform@localhost:5432/terraform?sslmode=disable"
                 docker run -t --user $(id -u):$(id -g) -v $(pwd):/app -w /app hashicorp/terraform:1.7.5 validate
-                terraform validate
+                #terraform validate
                 '''
             }
         }
