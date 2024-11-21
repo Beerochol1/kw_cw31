@@ -50,7 +50,7 @@ pipeline {
                         echo "ENV_auto_tfvars: $ENV_auto_tfvars"
                         cat $auto_tfvars
                         cat $ENV_auto_tfvars
-                        $TF_HOME/terraform plan -var-file=${auto_tfvars} -input=false -out=tfplan
+                        #$TF_HOME/terraform plan -var-file=${auto_tfvars} -input=false -out=tfplan
                         docker run -t --user $(id -u):$(id -g) -v $(pwd):/app -v $ENV_auto_tfvars:/secret/.auto.tfvars:ro -w /app hashicorp/terraform:1.7.5 plan -input=false -out=tfplan -var-file=/secret/.auto.tfvars
                         '''
                     }
